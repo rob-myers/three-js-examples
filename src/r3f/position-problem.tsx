@@ -26,7 +26,7 @@ function PositionProblem() {
   
   React.useEffect(() => {
     // Clear scene on HMR
-    scene.children.forEach(c => c.removeFromParent());
+    scene.children.slice().forEach(c => c.removeFromParent());
 
     const geometries = [
       new THREE.BoxGeometry( 1, 1, 1 ),
