@@ -7,11 +7,12 @@
  */
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
+import tunnel from 'tunnel-rat'
 
 import BaseExample from './r3f/base-example';
 import BoxParent from './r3f/box-parent';
 import PositionProblemCanvas from './r3f/position-problem';
-import tunnel from 'tunnel-rat'
+import MannequinTest from './r3f/mannequin-test';
 
 import './App.css'
 
@@ -39,6 +40,7 @@ const componentLookup = {
   BaseExample,
   BoxParent,
   PositionProblemCanvas,
+  MannequinTest,
 };
 
 type ComponentKey = keyof typeof componentLookup;
