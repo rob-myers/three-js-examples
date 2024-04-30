@@ -1,26 +1,23 @@
-import React from 'react'
 import { Canvas } from '@react-three/fiber';
-import { PerspectiveCamera, OrbitControls } from '@react-three/drei';
+import BoxParent from './r3f/box-parent';
+import tunnel from 'tunnel-rat'
+
 import './App.css'
 
-function App() {
+export default function App() {
   return (
     <>
       <div>
         Hello, World!
       </div>
-      <div style={{ width: 600, height: 400, border: '1px solid #888' }}>
+      <div className='canvas-container'>
         <Canvas>
-          <PerspectiveCamera/>
-          <OrbitControls/>
-          <mesh>
-            <boxGeometry/>
-            <meshBasicMaterial color="red" />
-          </mesh>
+          <BoxParent />
         </Canvas>
+        <tunnelRat.Out />
       </div>
     </>
   )
 }
 
-export default App
+export const tunnelRat = tunnel();
