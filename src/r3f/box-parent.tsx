@@ -1,3 +1,6 @@
+/**
+ * https://discourse.threejs.org/t/box3-setfromobject-parent-scene-add-box-vs-parent-add-box/64817/3
+ */
 import React from "react";
 import * as THREE from "three";
 import { PerspectiveCamera, MapControls } from "@react-three/drei";
