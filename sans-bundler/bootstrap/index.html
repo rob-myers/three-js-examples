@@ -2,6 +2,22 @@
 <html>
   <head>
     <title>three.js bootstrap</title>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.module.js"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import * as THREE from "three";
+      import { FBXLoader } from 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/loaders/FBXLoader.js';
+      console.log('THREE', THREE);
+      console.log('FBXLoader', FBXLoader);
+    </script>
+
   </head>
   <body>
     <h1>Using three.js without a JavaScript Bundler</h1>
