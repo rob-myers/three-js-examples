@@ -2,11 +2,18 @@
 
 ## Local dev
 
-### Without Bundler
+```sh
+# at repo root
+nvm use
+npm i
+npm run dev
+```
+
+## Unbundled Code Examples
 
 ```sh
 # at repo root
-cd sans-bundler
+cd src/sans-bundler
 npx http-server
 # navigate to http://localhost:8080/bootstrap/
 ```
@@ -14,7 +21,5 @@ npx http-server
 ## Repo setup
 
 ```sh
-# at repo root
-nvm use
 npm create vite@latest -- --template react-swc-ts
 ```
