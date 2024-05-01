@@ -15,6 +15,7 @@ import PositionProblemCanvas from './r3f/position-problem';
 import MannequinTest from './r3f/mannequin-test';
 
 import './App.css'
+import DreiSamplerTest from './r3f/drei-sampler-test';
 
 export default function App() {
 
@@ -41,6 +42,7 @@ const componentLookup = {
   BoxParent,
   PositionProblemCanvas,
   MannequinTest,
+  DreiSamplerTest,
 };
 
 type ComponentKey = keyof typeof componentLookup;
