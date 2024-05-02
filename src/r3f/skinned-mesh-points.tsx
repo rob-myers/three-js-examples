@@ -1,23 +1,40 @@
+import React from 'react';
 import { OrbitControls } from '@react-three/drei';
-import { BaseMesh246TriModel } from './Base-mesh-246-tri';
-// import * as THREE from 'three';
+import { BaseMesh246TriModel } from './Mixamo-test';
+import CharacterController from './character-controller';
+import { useFrame, useThree } from '@react-three/fiber';
+import type { OrbitControls as OrbitControlsType } from 'three-stdlib';
 
 export default function SkinnedMeshPoints() {
 
-  // const {scene: model } = useGLTF('/assets/FinalBaseMesh.glb');
-  // const {scene: model } = useGLTF('/assets/base-mesh-246-tri.glb');
-  // console.log(model)
+  const { set } = useThree();
+  const ccRef = React.useRef<CharacterController>(null);
+  const ocRef = React.useRef<OrbitControlsType>(null);
+
+  useFrame((_, deltaMs) => ccRef.current?.update(deltaMs));
+
+  React.useEffect(() => {
+    ocRef.current!.setPolarAngle(Math.PI/4);
+    set({ frameloop: 'always' });
+  }, []);
 
   return <>
-    <OrbitControls/>
+    <OrbitControls ref={ocRef} />
     <ambientLight />
-    <mesh scale={[10, 0.01, 10]}>
+    <mesh 
+      name="ground"
+      scale={[10, 0.01, 10]}
+      onClick={e => {
+        const characterController = ccRef.current!;
+        characterController.setTarget(e.point);
+        characterController.shouldRun = e.shiftKey;
+      }}
+    >
       <boxGeometry />
       <meshBasicMaterial color="gray" />
     </mesh>
-    <BaseMesh246TriModel/>
-    {/* <group>
-      <primitive object={model} />
-    </group> */}
+    
+    <BaseMesh246TriModel ref={ccRef} />
+
   </>
 }

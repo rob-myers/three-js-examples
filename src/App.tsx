@@ -23,7 +23,11 @@ export default function App() {
     <div className='canvas-container'>
       {component.name?.endsWith('Canvas')
         ? React.createElement(component)
-        : <Canvas>{React.createElement(component)}</Canvas>
+        : (
+          <Canvas frameloop='demand'>
+            {React.createElement(component)}
+          </Canvas>
+        )
       }
       <tunnelRat.Out />
     </div>
