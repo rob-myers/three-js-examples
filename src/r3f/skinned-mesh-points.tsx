@@ -3,16 +3,19 @@ import { OrbitControls, useGLTF } from '@react-three/drei';
 
 export default function SkinnedMeshPoints() {
 
-  const {scene: model } = useGLTF('/assets/FinalBaseMesh.glb');
+  // const {scene: model } = useGLTF('/assets/FinalBaseMesh.glb');
+  const {scene: model } = useGLTF('/assets/base-mesh-246-tri.glb');
+
+  console.log(model)
 
   return <>
     <OrbitControls/>
     <ambientLight />
     <mesh scale={[10, 0.01, 10]}>
       <boxGeometry />
-      <meshBasicMaterial color="black" />
+      <meshBasicMaterial color="gray" />
     </mesh>
-    <group scale={0.1}>
+    <group>
       <primitive object={model} />
     </group>
   </>
