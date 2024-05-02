@@ -9,10 +9,7 @@ import { shaderMaterial } from "@react-three/drei";
  */
 export const BasicSkinnedMeshMaterial = shaderMaterial(
   {
-    // center: null,
-    // thickness: 1,
-    // side: THREE.DoubleSide,
-    // isRawShaderMaterial: true,
+    // NOOP
   },
   /* glsl */`
   #include <skinning_pars_vertex>
@@ -31,7 +28,10 @@ export const BasicSkinnedMeshMaterial = shaderMaterial(
   `,
 );
 
-extend({ BasicSkinnedMeshMaterial });
+
+extend({
+  BasicSkinnedMeshMaterial,
+});
 
 declare global {
   namespace JSX {

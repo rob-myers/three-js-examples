@@ -1,11 +1,16 @@
 import React from 'react';
 import * as THREE from 'three';
-import { useGLTF, Outlines } from '@react-three/drei'
-import { GroupProps } from '@react-three/fiber';
+import {
+  useGLTF,
+  // Outlines,
+  Wireframe,
+} from '@react-three/drei'
+import { GroupProps, useThree } from '@react-three/fiber';
 import CharacterController from './character-controller';
-import { BasicSkinnedMeshMaterial } from './glsl';
+// import { BasicSkinnedMeshMaterial } from './glsl';
 
-const glbPath = '/assets/mixamo-test-transformed.glb';
+// const glbPath = '/assets/mixamo-test-transformed.glb';
+const glbPath = '/assets/mixamo-test.glb';
 
 /**
  * ```sh
@@ -26,6 +31,21 @@ export const MixamoTest = React.forwardRef<CharacterController, GroupProps>(
         skeleton: THREE.Skeleton;
       }
     };
+
+    const { gl } = useThree();
+
+    React.useMemo(() => {
+      gl.getContext().getExtension('OES_standard_derivatives');
+      const geometry = nodes.Cube.geometry;
+      // geometry.deleteAttribute('normal');
+      console.log(geometry.attributes);
+      const basis = [new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, 1)];
+      const position = geometry.attributes.position;
+      const centers = new Float32Array( position.count * 3 );
+      for (let i = 0, l = position.count; i < l; i ++)
+        basis[i % 3].toArray(centers, i * 3);
+      geometry.setAttribute('center', new THREE.BufferAttribute(centers, 3));
+    }, []);
 
     React.useEffect(() => {
       const model = groupRef.current!;
@@ -66,9 +86,22 @@ export const MixamoTest = React.forwardRef<CharacterController, GroupProps>(
               // material={nodes.Cube.material}
               skeleton={nodes.Cube.skeleton}
             >
-              <Outlines thickness={0.05} color="black" />
-              <basicSkinnedMeshMaterial
+              {/* <Outlines thickness={0.05} color="black" /> */}
+              {/* <basicSkinnedMeshMaterial
                 key={BasicSkinnedMeshMaterial.key}
+              /> */}
+              <meshBasicMaterial transparent />
+              <Wireframe
+                thickness={0.2}
+                fillOpacity={1}
+                opacity={0}
+                fillMix={1}
+                stroke="black"
+                backfaceStroke="black"
+                fill="#fff"
+                simplify={true}
+                colorBackfaces={false}                
+                // strokeOpacity={0}
               />
             </skinnedMesh>
           </group>
