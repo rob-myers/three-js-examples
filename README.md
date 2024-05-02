@@ -1,5 +1,7 @@
 # Examples using three.js
 
+These include examples derived from questions on <https://discourse.threejs.org/>.
+
 ## Local dev
 
 ```sh
