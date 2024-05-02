@@ -9,18 +9,14 @@ import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import tunnel from 'tunnel-rat'
 
-import BaseExample from './r3f/base-example';
-import BoxParent from './r3f/box-parent';
-import PositionProblemCanvas from './r3f/position-problem';
-import MannequinTest from './r3f/mannequin-test';
-
+import { ComponentKey, componentLookup } from './r3f';
 import './App.css'
 
 export default function App() {
 
   const component = React.useMemo(() => {
     const key = new URLSearchParams(window.location.search).get('component') ?? '';
-    return componentLookup[key as ComponentKey] ?? BoxParent;
+    return componentLookup[key as ComponentKey] ?? componentLookup.BoxParent;
   }, []);
 
   return (
@@ -35,12 +31,3 @@ export default function App() {
 }
 
 export const tunnelRat = tunnel();
-
-const componentLookup = {
-  BaseExample,
-  BoxParent,
-  PositionProblemCanvas,
-  MannequinTest,
-};
-
-type ComponentKey = keyof typeof componentLookup;
