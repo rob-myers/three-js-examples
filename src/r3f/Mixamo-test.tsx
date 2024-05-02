@@ -1,8 +1,9 @@
 import React from 'react';
 import * as THREE from 'three';
-import { useGLTF } from '@react-three/drei'
+import { useGLTF, Outlines } from '@react-three/drei'
 import { GroupProps } from '@react-three/fiber';
 import CharacterController from './character-controller';
+import { BasicSkinnedMeshMaterial } from './glsl';
 
 const glbPath = '/assets/mixamo-test-transformed.glb';
 
@@ -15,6 +16,7 @@ export const MixamoTest = React.forwardRef<CharacterController, GroupProps>(
   function BaseMesh246TriModel(props, ref) {
     const groupRef = React.useRef<THREE.Group>(null);
     const ctrlRef = React.useRef<CharacterController>();
+    const skinnedMeshRef = React.useRef<THREE.SkinnedMesh>(null);
     
     const imported = useGLTF(glbPath);
     const nodes = imported.nodes as typeof imported.nodes & {
@@ -48,11 +50,27 @@ export const MixamoTest = React.forwardRef<CharacterController, GroupProps>(
     }, []);
 
     return (
-      <group ref={groupRef} {...props} dispose={null}>
+      <group key={0} ref={groupRef} {...props} dispose={null}>
         <group name="Scene">
-          <group name="metarig" position={[-0.076, -0.095, -0.196]} rotation={[0.095, 0.05, -0.049]} scale={1.333}>
+          <group
+            name="metarig"
+            position={[-0.076, -0.095, -0.196]}
+            rotation={[0.095, 0.05, -0.049]}
+            scale={1.333}
+          >
             <primitive object={nodes.spine} />
-            <skinnedMesh name="Cube" geometry={nodes.Cube.geometry} material={nodes.Cube.material} skeleton={nodes.Cube.skeleton} />
+            <skinnedMesh
+              ref={skinnedMeshRef}
+              name="Cube"
+              geometry={nodes.Cube.geometry}
+              // material={nodes.Cube.material}
+              skeleton={nodes.Cube.skeleton}
+            >
+              <Outlines thickness={0.05} color="black" />
+              <basicSkinnedMeshMaterial
+                key={BasicSkinnedMeshMaterial.key}
+              />
+            </skinnedMesh>
           </group>
         </group>
       </group>
