@@ -1,6 +1,6 @@
 import React from 'react';
 import { OrbitControls } from '@react-three/drei';
-import { BaseMesh246TriModel } from './Mixamo-test';
+import { MixamoTest } from './Mixamo-test';
 import CharacterController from './character-controller';
 import { useFrame, useThree } from '@react-three/fiber';
 import type { OrbitControls as OrbitControlsType } from 'three-stdlib';
@@ -34,7 +34,7 @@ export default function SkinnedMeshPoints() {
       <meshBasicMaterial color="gray" />
     </mesh>
     
-    <BaseMesh246TriModel ref={ccRef} />
+    <MixamoTest ref={ccRef} />
 
   </>
 }

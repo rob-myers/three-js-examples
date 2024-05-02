@@ -11,7 +11,7 @@ const glbPath = '/assets/mixamo-test-transformed.glb';
  * npx gltfjsx mixamo-test.glb  --transform
  * ```
  */
-export const BaseMesh246TriModel = React.forwardRef<CharacterController, GroupProps>(
+export const MixamoTest = React.forwardRef<CharacterController, GroupProps>(
   function BaseMesh246TriModel(props, ref) {
     const groupRef = React.useRef<THREE.Group>(null);
     const ctrlRef = React.useRef<CharacterController>();
