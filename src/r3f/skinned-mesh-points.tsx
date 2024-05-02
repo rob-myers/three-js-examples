@@ -2,12 +2,11 @@ import React from 'react';
 import { OrbitControls } from '@react-three/drei';
 import { MixamoTest } from './Mixamo-test';
 import CharacterController from './character-controller';
-import { useFrame, useThree } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import type { OrbitControls as OrbitControlsType } from 'three-stdlib';
 
 export default function SkinnedMeshPoints() {
 
-  const { set } = useThree();
   const ccRef = React.useRef<CharacterController>(null);
   const ocRef = React.useRef<OrbitControlsType>(null);
 
@@ -15,7 +14,6 @@ export default function SkinnedMeshPoints() {
 
   React.useEffect(() => {
     ocRef.current!.setPolarAngle(Math.PI/4);
-    set({ frameloop: 'always' });
   }, []);
 
   return <>

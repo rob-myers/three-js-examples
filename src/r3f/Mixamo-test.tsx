@@ -2,10 +2,10 @@ import React from 'react';
 import * as THREE from 'three';
 import {
   useGLTF,
-  // Outlines,
-  Wireframe,
+  Outlines,
+  // Wireframe,
 } from '@react-three/drei'
-import { GroupProps, useThree } from '@react-three/fiber';
+import { GroupProps } from '@react-three/fiber';
 import CharacterController from './character-controller';
 // import { BasicSkinnedMeshMaterial } from './glsl';
 
@@ -18,7 +18,7 @@ const glbPath = '/assets/mixamo-test.glb';
  * ```
  */
 export const MixamoTest = React.forwardRef<CharacterController, GroupProps>(
-  function BaseMesh246TriModel(props, ref) {
+  function MixamoTest(props, ref) {
     const groupRef = React.useRef<THREE.Group>(null);
     const ctrlRef = React.useRef<CharacterController>();
     const skinnedMeshRef = React.useRef<THREE.SkinnedMesh>(null);
@@ -32,10 +32,7 @@ export const MixamoTest = React.forwardRef<CharacterController, GroupProps>(
       }
     };
 
-    const { gl } = useThree();
-
     React.useMemo(() => {
-      gl.getContext().getExtension('OES_standard_derivatives');
       const geometry = nodes.Cube.geometry;
       // geometry.deleteAttribute('normal');
       console.log(geometry.attributes);
@@ -86,12 +83,12 @@ export const MixamoTest = React.forwardRef<CharacterController, GroupProps>(
               // material={nodes.Cube.material}
               skeleton={nodes.Cube.skeleton}
             >
-              {/* <Outlines thickness={0.05} color="black" /> */}
+              <Outlines thickness={0.05} color="black" />
               {/* <basicSkinnedMeshMaterial
                 key={BasicSkinnedMeshMaterial.key}
               /> */}
               <meshBasicMaterial transparent />
-              <Wireframe
+              {/* <Wireframe
                 thickness={0.2}
                 fillOpacity={1}
                 opacity={0}
@@ -102,7 +99,7 @@ export const MixamoTest = React.forwardRef<CharacterController, GroupProps>(
                 simplify={true}
                 colorBackfaces={false}                
                 // strokeOpacity={0}
-              />
+              /> */}
             </skinnedMesh>
           </group>
         </group>

@@ -24,7 +24,7 @@ export default function App() {
       {component.name?.endsWith('Canvas')
         ? React.createElement(component)
         : (
-          <Canvas frameloop='demand'>
+          <Canvas>
             {React.createElement(component)}
           </Canvas>
         )
