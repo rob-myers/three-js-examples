@@ -50,15 +50,21 @@ export default function BasicCharacterShaderTest() {
         top: 0,
         fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif`
       }}>
-        <select onChange={e => {
-          const effect = e.currentTarget.value as Effect;
-          setState(s => ({ ...s, effect }));
-        }}>
+        <select
+          value={state.effect}
+          onChange={e => {
+            const effect = e.currentTarget.value as Effect;
+            setState(s => ({ ...s, effect }));
+          }}
+        >
           <option value={effects['drei-outlines']}>
             @react-three/drei Outlines
           </option>
           <option value={effects['drei-wireframe']}>
             @react-three/drei Wireframe
+          </option>
+          <option value={effects['drei-wireframe-filled']}>
+            @react-three/drei Wireframe (filled)
           </option>
           <option value={effects['custom-wireframe']}>
             Custom wireframe
@@ -67,7 +73,7 @@ export default function BasicCharacterShaderTest() {
         &nbsp;
         &nbsp;
         <a href={links[state.effect]} target='_blank'>
-          Source
+          [source]
         </a>
       </div>
     </tunnelRat.In>
@@ -82,12 +88,14 @@ interface State {
 const effects = {
   'drei-outlines': 'drei-outlines',
   'drei-wireframe': 'drei-wireframe',
+  'drei-wireframe-filled': 'drei-wireframe-filled',
   'custom-wireframe': 'custom-wireframe',
 } as const;
 
 const links: Record<Effect, string> = {
   'drei-outlines': 'https://github.com/pmndrs/drei?tab=readme-ov-file#outlines',
   'drei-wireframe': 'https://github.com/pmndrs/drei?tab=readme-ov-file#wireframe',
+  'drei-wireframe-filled': 'https://github.com/pmndrs/drei?tab=readme-ov-file#wireframe',
   'custom-wireframe': 'https://threejs.org/examples/webgl_materials_wireframe',
 };
 
@@ -96,13 +104,27 @@ const effectNodes: Record<Effect, React.ReactNode> = {
   'drei-wireframe': (
     <Wireframe
       thickness={0.2}
+      // simplify={true}
+      fillOpacity={0}
+      opacity={0}
+      fillMix={1}
+      stroke="black"
+      backfaceStroke="black"
+      fill="#fff"
+      colorBackfaces={false}                
+      // strokeOpacity={0}
+    />
+  ),
+  'drei-wireframe-filled': (
+    <Wireframe
+      thickness={0.2}
+      // simplify={true}
       fillOpacity={1}
       opacity={0}
       fillMix={1}
       stroke="black"
       backfaceStroke="black"
       fill="#fff"
-      simplify={true}
       colorBackfaces={false}                
       // strokeOpacity={0}
     />
