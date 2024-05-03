@@ -2,7 +2,7 @@ import React from 'react';
 import * as THREE from 'three';
 import {
   useGLTF,
-  Outlines,
+  // Outlines,
   // Wireframe,
 } from '@react-three/drei'
 import { GroupProps } from '@react-three/fiber';
@@ -17,7 +17,7 @@ const glbPath = '/assets/mixamo-test.glb';
  * npx gltfjsx mixamo-test.glb  --transform
  * ```
  */
-export const MixamoTest = React.forwardRef<CharacterController, GroupProps>(
+export const MixamoTest = React.forwardRef<CharacterController, Props>(
   function MixamoTest(props, ref) {
     const groupRef = React.useRef<THREE.Group>(null);
     const ctrlRef = React.useRef<CharacterController>();
@@ -83,11 +83,12 @@ export const MixamoTest = React.forwardRef<CharacterController, GroupProps>(
               // material={nodes.Cube.material}
               skeleton={nodes.Cube.skeleton}
             >
-              <Outlines thickness={0.05} color="black" />
+              {props.skinnedMeshChildren}
+              {/* <Outlines thickness={0.05} color="black" /> */}
               {/* <basicSkinnedMeshMaterial
                 key={BasicSkinnedMeshMaterial.key}
               /> */}
-              <meshBasicMaterial transparent />
+              {/* <meshBasicMaterial transparent /> */}
               {/* <Wireframe
                 thickness={0.2}
                 fillOpacity={1}
@@ -109,3 +110,7 @@ export const MixamoTest = React.forwardRef<CharacterController, GroupProps>(
 );
 
 useGLTF.preload(glbPath);
+
+interface Props extends GroupProps {
+  skinnedMeshChildren?: React.ReactNode;
+}
