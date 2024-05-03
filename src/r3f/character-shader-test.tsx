@@ -50,7 +50,8 @@ export default function BasicCharacterShaderTest() {
       <div style={{
         position: 'absolute',
         top: 0,
-        fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif`
+        fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif`,
+        padding: 8,
       }}>
         <select
           value={state.effect}
@@ -58,6 +59,7 @@ export default function BasicCharacterShaderTest() {
             const effect = e.currentTarget.value as Effect;
             setState(s => ({ ...s, effect }));
           }}
+          style={{ fontSize: 16 }}
         >
           <option value={effects['drei-outlines']}>
             @react-three/drei Outlines
@@ -69,15 +71,17 @@ export default function BasicCharacterShaderTest() {
             @react-three/drei Wireframe (filled)
           </option>
           <option value={effects['custom-wireframe']}>
-            Custom wireframe
+            Custom wireframe (broken)
           </option>
         </select>
-        &nbsp;
-        &nbsp;
-        <a href={links[state.effect]} target='_blank'>
-          [source]
-        </a>
-      </div>
+        <div style={{ padding: '8px 0 8px 12px' }}>
+          Click floor to move
+          &nbsp;
+          <a href={links[state.effect]} target='_blank'>
+            [source]
+          </a>
+        </div>
+        </div>
     </tunnelRat.In>
   </>
 }
