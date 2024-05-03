@@ -2,7 +2,7 @@
 import React from "react";
 import { useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import { Male, setScene } from './mannequin';
+import { Male, setScene } from './mannequin-test/mannequin';
 
 export default function MannequinTest() {
 

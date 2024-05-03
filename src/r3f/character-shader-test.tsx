@@ -1,11 +1,11 @@
 import React from 'react';
 import { OrbitControls } from '@react-three/drei';
-import { MixamoTest } from './Mixamo-test';
-import CharacterController from './character-controller';
+import { MixamoTest } from './character-shader-test/Mixamo-test';
+import CharacterController from './character-shader-test/character-controller';
 import { useFrame } from '@react-three/fiber';
 import type { OrbitControls as OrbitControlsType } from 'three-stdlib';
 
-export default function SkinnedMeshPoints() {
+export default function BasicCharacterShaderTest() {
 
   const ccRef = React.useRef<CharacterController>(null);
   const ocRef = React.useRef<OrbitControlsType>(null);
