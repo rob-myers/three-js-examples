@@ -1,10 +1,12 @@
 import React from 'react';
+import * as THREE from 'three';
 import { OrbitControls, Outlines, Wireframe } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import type { OrbitControls as OrbitControlsType } from 'three-stdlib';
 import { tunnelRat } from '../App';
 import { MixamoTest } from './character-shader-test/Mixamo-test';
 import CharacterController from './character-shader-test/character-controller';
+import { CustomWireframeMaterial } from './character-shader-test/glsl';
 
 export default function BasicCharacterShaderTest() {
 
@@ -112,7 +114,6 @@ const effectNodes: Record<Effect, React.ReactNode> = {
       backfaceStroke="black"
       fill="#fff"
       colorBackfaces={false}                
-      // strokeOpacity={0}
     />
   ),
   'drei-wireframe-filled': (
@@ -126,10 +127,16 @@ const effectNodes: Record<Effect, React.ReactNode> = {
       backfaceStroke="black"
       fill="#fff"
       colorBackfaces={false}                
-      // strokeOpacity={0}
     />
   ),
-  'custom-wireframe': null,
+  'custom-wireframe': (
+    <customWireframeMaterial
+      key={CustomWireframeMaterial.key}
+      alphaToCoverage
+      side={THREE.DoubleSide}
+      thickness={2}
+    />
+  ),
 };
 
 type Effect = keyof typeof effects;

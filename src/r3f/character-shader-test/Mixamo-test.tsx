@@ -32,10 +32,12 @@ export const MixamoTest = React.forwardRef<CharacterController, Props>(
       }
     };
 
+    // view-source:https://threejs.org/examples/webgl_materials_wireframe
     React.useMemo(() => {
       const geometry = nodes.Cube.geometry;
-      // geometry.deleteAttribute('normal');
-      console.log(geometry.attributes);
+      geometry.deleteAttribute('normal');
+      geometry.deleteAttribute('uv');
+      console.info('geometry.attributes', geometry.attributes);
       const basis = [new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, 1)];
       const position = geometry.attributes.position;
       const centers = new Float32Array( position.count * 3 );
